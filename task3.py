@@ -9,13 +9,13 @@ def get_best_threshold(targets, pred_probs):
         count[prob][target] += 1
 
     tpr = 1
-    fpr = 0
+    tnr = 0
     answer = (-1, -1) # (Youden's statistic, threshold (>))
 
     for threshold in thresholds:
         tpr -= count[threshold][1] / positives
-        fpr += count[threshold][0] / negatives
-        youden = tpr + fpr - 1
+        tnr += count[threshold][0] / negatives
+        youden = tpr + tnr - 1
 
         if answer[0] < youden:
             answer = (youden, threshold)
